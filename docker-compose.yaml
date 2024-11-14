@@ -1,0 +1,28 @@
+services:
+  posts-service:
+    image: postgres
+    container_name: posts_service
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTS_POSTGRES_DB}
+    volumes:
+      - posts-data:/var/lib/postgresql/data
+
+  users-service:
+    image: postgres
+    container_name: users_service
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${USERS_POSTGRES_DB}
+    volumes:
+      - users-data:/var/lib/postgresql/data
+
+volumes:
+  posts-data:
+  users-data:
